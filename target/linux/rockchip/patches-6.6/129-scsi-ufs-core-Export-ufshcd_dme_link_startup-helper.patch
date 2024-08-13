@@ -1,0 +1,61 @@
+From: Shawn Lin <shawn.lin@rock-chips.com>
+To: Rob Herring <robh+dt@kernel.org>,
+	"James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>,
+	"Martin K . Petersen" <martin.petersen@oracle.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>
+Cc: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+	Heiko Stuebner <heiko@sntech.de>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Avri Altman <avri.altman@wdc.com>,
+	Bart Van Assche <bvanassche@acm.org>,
+	YiFeng Zhao <zyf@rock-chips.com>, Liang Chen <cl@rock-chips.com>,
+	linux-scsi@vger.kernel.org, linux-rockchip@lists.infradead.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	Shawn Lin <shawn.lin@rock-chips.com>
+Subject: [PATCH v2 1/3] scsi: ufs: core: Export ufshcd_dme_link_startup() helper
+Date: Thu,  8 Aug 2024 11:52:41 +0800	[thread overview]
+Message-ID: <1723089163-28983-2-git-send-email-shawn.lin@rock-chips.com> (raw)
+In-Reply-To: <1723089163-28983-1-git-send-email-shawn.lin@rock-chips.com>
+
+Export it for host drivers.
+
+Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
+---
+
+Changes in v2: None
+
+ drivers/ufs/core/ufshcd.c | 4 +++-
+ include/ufs/ufshcd.h      | 1 +
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+--- a/drivers/ufs/core/ufshcd.c
++++ b/drivers/ufs/core/ufshcd.c
+@@ -3871,7 +3871,7 @@ static void ufshcd_host_memory_configure
+  *
+  * Return: 0 on success, non-zero value on failure.
+  */
+-static int ufshcd_dme_link_startup(struct ufs_hba *hba)
++int ufshcd_dme_link_startup(struct ufs_hba *hba)
+ {
+ 	struct uic_command uic_cmd = {0};
+ 	int ret;
+@@ -3884,6 +3884,8 @@ static int ufshcd_dme_link_startup(struc
+ 			"dme-link-startup: error code %d\n", ret);
+ 	return ret;
+ }
++EXPORT_SYMBOL_GPL(ufshcd_dme_link_startup);
++
+ /**
+  * ufshcd_dme_reset - UIC command for DME_RESET
+  * @hba: per adapter instance
+--- a/include/ufs/ufshcd.h
++++ b/include/ufs/ufshcd.h
+@@ -1368,6 +1368,7 @@ int ufshcd_read_string_desc(struct ufs_h
+ void ufshcd_hold(struct ufs_hba *hba);
+ void ufshcd_release(struct ufs_hba *hba);
+ 
++int ufshcd_dme_link_startup(struct ufs_hba *hba);
+ void ufshcd_clkgate_delay_set(struct device *dev, unsigned long value);
+ 
+ u32 ufshcd_get_local_unipro_ver(struct ufs_hba *hba);

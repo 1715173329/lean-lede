@@ -8,7 +8,7 @@
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3566-quartz64-a.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3566-quartz64-b.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3566-radxa-cm3-io.dtb
-@@ -98,9 +99,20 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-lu
+@@ -99,9 +100,20 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-lu
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-nanopi-r5c.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-nanopi-r5s.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-odroid-m1.dtb
