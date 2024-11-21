@@ -67,6 +67,13 @@ define rkbin/rk3568
   TPL:=rk35/rk3568_ddr_1560MHz_v1.21.bin
 endef
 
+define rkbin/rk3576
+  DEPENDS:=@TARGET_rockchip_armv8
+  ATF:=rk35/rk3576_bl31_v1.04.elf
+  TPL:=rk35/rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.03.bin
+  TEE:=rk35/rk3576_bl32_v1.01.bin
+endef
+
 define rkbin/rk3588
   DEPENDS:=@TARGET_rockchip_armv8
   ATF:=rk35/rk3588_bl31_v1.45.elf
@@ -79,6 +86,7 @@ VARIANTS:= \
 	rk3528 \
 	rk3566 \
 	rk3568 \
+	rk3576 \
 	rk3588
 
 define Build/Compile
@@ -116,6 +124,9 @@ ifneq ($(SPL),)
 	$(CP) $(PKG_BUILD_DIR)/tools/loaderimage $(STAGING_DIR_IMAGE)/
 	$(CP) $(PKG_BUILD_DIR)/$(BUILD_VARIANT)-idbloader.bin $(STAGING_DIR_IMAGE)/
 	$(CP) $(PKG_BUILD_DIR)/$(BUILD_VARIANT)-trust.bin $(STAGING_DIR_IMAGE)/
+endif
+ifneq ($(TEE),)
+	$(CP) $(PKG_BUILD_DIR)/bin/$(TEE) $(STAGING_DIR_IMAGE)/
 endif
 endef
 

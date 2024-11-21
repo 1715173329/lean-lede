@@ -1,6 +1,12 @@
 part uuid mmc ${devnum}:2 uuid
 
-setenv bootargs "console=ttyS0,1500000 earlycon=uart8250,mmio32,0xff9f0000 root=PARTUUID=${uuid} rw rootwait"
+if test $stdout = 'serial@2ad40000';
+then serial_addr=',0x2ad40000';
+elif test $stdout = 'serial@ff9f0000';
+then serial_addr=',0xff9f0000';
+fi;
+
+setenv bootargs "console=ttyS0,1500000 earlycon=uart8250,mmio32${serial_addr} root=PARTUUID=${uuid} rw rootwait"
 
 load mmc ${devnum}:1 ${fdt_addr_r} rockchip.dtb
 load mmc ${devnum}:1 ${kernel_addr_r} kernel.img
