@@ -348,6 +348,7 @@ define Device/mmbox_anas3035
   DEVICE_MODEL := ANAS3035
   SOC := rk3568
   DEVICE_DTS := rockchip/rk3568-mmbox-anas3035
+  SUPPORTED_DEVICES += itreechain,a2402
   UBOOT_DEVICE_NAME := mmbox-anas3035-rk3568
   IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-img | gzip | append-metadata
   DEVICE_PACKAGES := kmod-r8125-rss kmod-ata-ahci-dwc kmod-hwmon-pwmfan kmod-hwmon-drivetemp
